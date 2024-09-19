@@ -2,7 +2,6 @@ import datetime
 import pytz
 from motor.motor_asyncio import AsyncIOMotorClient
 from info import SETTINGS, PREMIUM_POINT,REF_PREMIUM,DATABASE_NAME, DATABASE_URI,DEFAULT_POST_MODE
-# from utils import get_seconds
 client = AsyncIOMotorClient(DATABASE_URI)
 mydb = client[DATABASE_NAME]
 fsubs = client['fsubs']
