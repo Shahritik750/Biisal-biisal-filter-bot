@@ -42,7 +42,7 @@ class Database:
 
     async def find_join_req(self, id):
         return bool(await self.req.find_one({'id': id}))
-        
+
     async def add_join_req(self, id):
         await self.req.insert_one({'id': id})
 
@@ -58,11 +58,11 @@ class Database:
                 reason=""
             )
         )
-    
+
     async def add_user(self, id, name):
         user = self.new_user(id, name)
         await self.col.insert_one(user)
-        
+
     async def update_point(self ,id):
         await self.col.update_one({'id' : id} , {'$inc':{'point' : 100}})
         point = (await self.col.find_one({'id' : id}))['point']
@@ -79,15 +79,15 @@ class Database:
     async def get_point(self , id):
         newPoint = await self.col.find_one({'id' : id})
         return newPoint['point'] if newPoint else None
-        
+
     async def is_user_exist(self, id):
         user = await self.col.find_one({'id':int(id)})
         return bool(user)
-    
+
     async def total_users_count(self):
         count = await self.col.count_documents({})
         return count
-    
+
     async def get_all_users(self):
         return self.col.find({})
 
@@ -96,14 +96,14 @@ class Database:
 
     async def delete_chat(self, id):
         await self.grp.delete_many({'id': int(id)})
-        
+
     async def get_banned(self):
         users = self.col.find({'ban_status.is_banned': True})
         chats = self.grp.find({'chat_status.is_disabled': True})
         b_chats = [chat['id'] async for chat in chats]
         b_users = [user['id'] async for user in users]
         return b_users, b_chats
-    
+
     async def add_chat(self, chat, title):
         chat = self.new_group(chat, title)
         await self.grp.insert_one(chat)
@@ -114,11 +114,11 @@ class Database:
 
     async def update_settings(self, id, settings):
         await self.grp.update_one({'id': int(id)}, {'$set': {'settings': settings}})   
-    
+
     async def total_chat_count(self):
         count = await self.grp.count_documents({})
         return count
-    
+
     async def get_all_chats(self):
         return self.grp.find({})
 
@@ -217,7 +217,7 @@ class Database:
                 second_time = user["third_time_verified"].astimezone(ist_timezone)
                 return second_time < pastDate
         return False
-   
+
     async def create_verify_id(self, user_id: int, hash):
         res = {"user_id": user_id, "hash":hash, "verified":False}
         return await self.verify_id.insert_one(res)
@@ -233,7 +233,7 @@ class Database:
     async def get_user(self, user_id):
         user_data = await self.users.find_one({"id": user_id})
         return user_data
-        
+
     async def update_user(self, user_data):
         await self.users.update_one({"id": user_data["id"]}, {"$set": user_data}, upsert=True)
 
@@ -248,7 +248,7 @@ class Database:
             else:
                 await self.users.update_one({"id": user_id}, {"$set": {"expiry_time": None}})
         return False
-        
+
     async def update_one(self, filter_query, update_data):
         try:
             result = await self.users.update_one(filter_query, update_data)
@@ -277,7 +277,7 @@ class Database:
                 if myLinks is not None:
                     if index == 0:
                         return myLinks.get("links")[0] , myLinks.get("ispm")
-                    
+
                     else :
                         return myLinks.get("links")[1]
                 else:
@@ -345,8 +345,8 @@ class Database:
             post_mode["singel_post_mode"] = not post_mode.get("singel_post_mode", True)
         elif index == 2:
             post_mode["all_files_post_mode"] = not post_mode.get("all_files_post_mode", True)
-        
+
         await self.update_post_mode.update_one({}, {"$set": post_mode}, upsert=True)
-        
+
         return post_mode
 db = Database()

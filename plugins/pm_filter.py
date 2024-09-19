@@ -42,7 +42,7 @@ async def pm_search(client, message):
             ]
         ),
         )
-    
+
 @Client.on_message(filters.group & filters.text & filters.incoming)
 async def group_search(client, message):
     user_id = message.from_user.id if message.from_user else None
@@ -67,13 +67,13 @@ async def group_search(client, message):
         if not user_id:
             await message.reply("<b>🚨 ɪ'ᴍ ɴᴏᴛ ᴡᴏʀᴋɪɴɢ ғᴏʀ ᴀɴᴏɴʏᴍᴏᴜꜱ ᴀᴅᴍɪɴ!</b>")
             return
-        
+
         if 'hindi' in message.text.lower() or 'tamil' in message.text.lower() or 'telugu' in message.text.lower() or 'malayalam' in message.text.lower() or 'kannada' in message.text.lower() or 'english' in message.text.lower() or 'gujarati' in message.text.lower(): 
             return await auto_filter(client, message)
 
         elif message.text.startswith("/"):
             return
-        
+
         elif re.findall(r'https?://\S+|www\.\S+|t\.me/\S+', message.text):
             if await is_check_admin(client, message.chat.id, message.from_user.id):
                 return
@@ -209,7 +209,7 @@ async def next_page(bot, query):
     except MessageNotModified:
         pass
     await query.answer()
-    
+
 @Client.on_callback_query(filters.regex(r"^seasons#"))
 async def seasons_cb_handler(client: Client, query: CallbackQuery):
     _, key, offset, req = query.data.split("#")
@@ -244,7 +244,7 @@ async def season_search(client: Client, query: CallbackQuery):
         seas = f'S0{seas}'
     else:
         seas = f'S{seas}'
-    
+
     if int(req) != query.from_user.id:
         return await query.answer(script.ALRT_TXT, show_alert=True)	
     offset = int(offset)
@@ -265,7 +265,7 @@ async def season_search(client: Client, query: CallbackQuery):
         except : 
             n_offset = 0
     files = [file for file in files if re.search(seas, file.file_name, re.IGNORECASE)]
-    
+
     if not files:
         files = [file for file in files2 if re.search(season, file.file_name, re.IGNORECASE)]
         if not files:
@@ -289,7 +289,7 @@ async def season_search(client: Client, query: CallbackQuery):
                 InlineKeyboardButton(text=f"🔗 {get_size(file.file_size)}≽ {formate_file_name(file.file_name)}", callback_data=f'files#{reqnxt}#{file.file_id}'),]
                    for file in files
               ]
-   
+
     btn.insert(0,[
         InlineKeyboardButton("🎭 ᴄʜᴏᴏsᴇ ʟᴀɴɢᴜᴀɢᴇ ✨", callback_data=f"languages#{key}#{offset}#{req}"),
         ])
@@ -300,7 +300,7 @@ async def season_search(client: Client, query: CallbackQuery):
     btn.insert(2,[
         InlineKeyboardButton("♻️ sᴇɴᴅ ᴀʟʟ", callback_data=batch_link),
         ])
-    
+
     if n_offset== '':
         btn.append(
             [InlineKeyboardButton(text="🚸 ɴᴏ ᴍᴏʀᴇ ᴘᴀɢᴇs 🚸", callback_data="buttons")]
@@ -346,7 +346,7 @@ async def years_cb_handler(client: Client, query: CallbackQuery):
                 callback_data=f"years_search#{YEARS[i+2].lower()}#{key}#0#{offset}#{req}"
             ),
         ])
-    
+
     btn.append([InlineKeyboardButton(text="⪻ ʙᴀᴄᴋ ᴛᴏ ᴍᴀɪɴ ᴘᴀɢᴇ", callback_data=f"next_{req}_{key}_{offset}")])
     await query.message.edit_text("<b>ɪɴ ᴡʜɪᴄʜ ʏᴇᴀʀ ᴅᴏ ʏᴏᴜ ᴡᴀɴᴛ, ᴄʜᴏᴏsᴇ ғʀᴏᴍ ʜᴇʀᴇ ↓↓</b>", reply_markup=InlineKeyboardMarkup(btn))
     return
@@ -391,8 +391,8 @@ async def year_search(client: Client, query: CallbackQuery):
                 InlineKeyboardButton(text=f"🔗 {get_size(file.file_size)}≽ {formate_file_name(file.file_name)}", callback_data=f'files#{reqnxt}#{file.file_id}'),]
                    for file in files
               ]
-        
-   
+
+
     btn.insert(0,[
         InlineKeyboardButton("✨ ᴄʜᴏᴏsᴇ season🍿", callback_data=f"seasons#{key}#{offset}#{req}")
         ])
@@ -403,7 +403,7 @@ async def year_search(client: Client, query: CallbackQuery):
     btn.insert(2,[
         InlineKeyboardButton("♻️ sᴇɴᴅ ᴀʟʟ", callback_data=batch_link),
         ])
-    
+
     if n_offset== '':
         btn.append(
             [InlineKeyboardButton(text="🚸 ɴᴏ ᴍᴏʀᴇ ᴘᴀɢᴇs 🚸", callback_data="buttons")]
@@ -493,8 +493,8 @@ async def quality_search(client: Client, query: CallbackQuery):
                 InlineKeyboardButton(text=f"🔗 {get_size(file.file_size)}≽ {formate_file_name(file.file_name)}", callback_data=f'files#{reqnxt}#{file.file_id}'),]
                    for file in files
               ]
-        
- 
+
+
     btn.insert(0,[
         InlineKeyboardButton("🎭 ᴄʜᴏᴏsᴇ ʟᴀɴɢᴜᴀɢᴇ ✨", callback_data=f"languages#{key}#{offset}#{req}"),
         ])
@@ -599,7 +599,7 @@ async def lang_search(client: Client, query: CallbackQuery):
                 InlineKeyboardButton(text=f"🔗 {get_size(file.file_size)}≽ {formate_file_name(file.file_name)}", callback_data=f'files#{reqnxt}#{file.file_id}'),]
                    for file in files
               ]
-        
+
 
     btn.insert(0,[
         InlineKeyboardButton("🎭 ᴄʜᴏᴏsᴇ ǫᴜᴀʟɪᴛʏ ✨", callback_data=f"qualities#{key}#{offset}#{req}"),
@@ -688,11 +688,11 @@ async def cb_handler(client: Client, query: CallbackQuery):
             f"Hey {query.from_user.first_name}, Jaldi Yeha Se Hato", show_alert=True
             )
         newPoint = await db.get_point(clicker)
-        
+
         return await query.message.edit(script.REF_POINT.format(newPoint) , reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton('🎁 ɢᴇᴛ ʏᴏᴜʀ ʀᴇғᴇʀʀᴀʟ ʟɪɴᴋ 🎁', callback_data=f'free_premium#{query.from_user.id}')],   
                 [InlineKeyboardButton('⋞ ʜᴏᴍᴇ', callback_data='start')],]))
-        
+
     elif query.data == "premium":
         userid = query.from_user.id
         await query.message.edit(script.PREMIUM_TEXT , reply_markup=InlineKeyboardMarkup([
@@ -775,7 +775,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
     elif query.data.startswith("lang_art"):
         _, lang = query.data.split("#")
         await query.answer(f"ʏᴏᴜ sᴇʟᴇᴄᴛᴇᴅ {lang.title()} ʟᴀɴɢᴜᴀɢᴇ ⚡️", show_alert=True)
-  
+
     elif query.data == "start":
         buttons = [[
             InlineKeyboardButton('⇆ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘs ⇆', url=f'http://t.me/{temp.U_NAME}?startgroup=start')
@@ -888,14 +888,14 @@ async def cb_handler(client: Client, query: CallbackQuery):
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
 	)
-  
+
 
     elif query.data == "all_files_delete":
         files = await Media.count_documents()
         await query.answer('Deleting...')
         await Media.collection.drop()
         await query.message.edit_text(f"Successfully deleted {files} files")
-        
+
     elif query.data.startswith("killfilesak"):
         ident, keyword = query.data.split("#")
         await query.message.edit_text(f"<b>ꜰᴇᴛᴄʜɪɴɢ ꜰɪʟᴇs ꜰᴏʀ ʏᴏᴜʀ ǫᴜᴇʀʏ {keyword} ᴏɴ ᴅʙ...\n\nᴘʟᴇᴀsᴇ ᴡᴀɪᴛ...</b>")
@@ -920,7 +920,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 await query.message.edit_text(f'Error: {e}')
             else:
                 await query.message.edit_text(f"<b>Process Completed for file deletion !\n\nSuccessfully deleted {str(deleted)} files from database for your query {keyword}.</b>")
-          
+
     elif query.data.startswith("reset_grp_data"):
         grp_id = query.message.chat.id
         btn = [[
@@ -979,7 +979,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             await d.delete()
         else:
             await query.message.edit_text("<b>ꜱᴏᴍᴇᴛʜɪɴɢ ᴡᴇɴᴛ ᴡʀᴏɴɢ</b>")
-            
+
     elif query.data.startswith("show_options"):
         ident, user_id, msg_id = query.data.split("#")
         chnl_id = query.message.chat.id
@@ -1352,7 +1352,7 @@ async def auto_filter(client, msg, spoll=False , pm_mode = False):
         btn.insert(1,[
             InlineKeyboardButton("No More Pages", user_id=ADMINS[0])
         ])
-                             
+
     if spoll:
         m = await msg.message.edit(f"<b><code>{search}</code> ɪs ꜰᴏᴜɴᴅ ᴘʟᴇᴀsᴇ ᴡᴀɪᴛ ꜰᴏʀ ꜰɪʟᴇs 📫</b>")
         await delSticker(st)
@@ -1373,7 +1373,7 @@ async def auto_filter(client, msg, spoll=False , pm_mode = False):
             offset = int(offset) 
         except:
             offset = int(MAX_BTN)
-        
+
     imdb = await get_poster(search, file=(files[0]).file_name) if settings["imdb"] else None
     TEMPLATE = settings['template']
     if imdb:

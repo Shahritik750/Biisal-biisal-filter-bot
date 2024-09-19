@@ -17,7 +17,7 @@ logger.setLevel(logging.INFO)
 
 BANNED = {}
 imdb = Cinemagoer() 
- 
+
 class temp(object):
     ME = None
     CURRENT=int(os.environ.get("SKIP", 2))
@@ -171,7 +171,7 @@ async def get_settings(group_id , pm_mode = False):
     else:
         settings = await db.get_settings(group_id)
     return settings 
-    
+
 async def save_group_settings(group_id, key, value):
     current = await get_settings(group_id)
     current.update({key: value})
