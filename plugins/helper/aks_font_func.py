@@ -126,7 +126,7 @@ class Fonts:
         for i, j in style.items():
             text = text.replace(i, j)
         return text
-    
+
     def serief(text):
         style = {
             'a': '𝐚',
@@ -313,7 +313,7 @@ class Fonts:
         for i, j in style.items():
             text = text.replace(i, j)
         return text
-     
+
     def smallcap(text):
         style = {
             'a': 'ᴀ',
@@ -382,7 +382,7 @@ class Fonts:
         for i, j in style.items():
             text = text.replace(i, j)
         return text
-        
+
     def script(text):
         style = {
             'a': '𝒶',

@@ -201,7 +201,7 @@ async def start(client:Client, message):
         ]]
 
         if message.command[1] != "subscribe":
-            
+
             try:
                 chksub_data = message.command[1].replace('pm_mode_', '') if pm_mode else message.command[1]
                 kk, grp_id, file_id = chksub_data.split('_', 2)
@@ -244,7 +244,7 @@ async def start(client:Client, message):
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
-        
+
     if data.startswith('pm_mode_'):
         pm_mode = True
         data = data.replace('pm_mode_', '')
@@ -285,7 +285,7 @@ async def start(client:Client, message):
             await d.delete()
             await m.delete()
             return
-            
+
     if data and data.startswith("allfiles"):
         _, key = data.split("_", 1)
         files = temp.FILES_ID.get(key)
@@ -380,7 +380,7 @@ async def delete(bot, message):
     else:
         await msg.edit('<b>ᴛʜɪs ɪs ɴᴏᴛ sᴜᴘᴘᴏʀᴛᴇᴅ ꜰɪʟᴇ ꜰᴏʀᴍᴀᴛ</b>')
         return
-    
+
     file_id, file_ref = unpack_new_file_id(media.file_id)
     result = await Media.collection.delete_one({
         '_id': file_id,
@@ -480,7 +480,7 @@ async def save_template(client, message):
         return await message.reply_text("Command Incomplete!")    
     await save_group_settings(grp_id, 'template', template)
     await message.reply_text(f"Successfully changed template for {title} to\n\n{template}", disable_web_page_preview=True)
-    
+
 @Client.on_message(filters.command("send"))
 async def send_msg(bot, message):
     if message.from_user.id not in ADMINS:
@@ -623,7 +623,7 @@ async def save_caption(client, message):
         return await message.reply_text("Command Incomplete!")
     await save_group_settings(grp_id, 'caption', caption)
     await message.reply_text(f"Successfully changed caption for {title} to\n\n{caption}", disable_web_page_preview=True) 
-    
+
 @Client.on_message(filters.command('set_tutorial'))
 async def save_tutorial(client, message):
     grp_id = message.chat.id
@@ -639,7 +639,7 @@ async def save_tutorial(client, message):
         return await message.reply_text("<b>Command Incomplete!!\n\nuse like this -</b>\n\n<code>/set_caption https://t.me/bisal_files</code>")    
     await save_group_settings(grp_id, 'tutorial', tutorial)
     await message.reply_text(f"<b>Successfully changed tutorial for {title} to</b>\n\n{tutorial}", disable_web_page_preview=True)
-    
+
 @Client.on_message(filters.command('set_shortner'))
 async def set_shortner(c, m):
     grp_id = m.chat.id
@@ -775,7 +775,7 @@ async def all_settings(client, message):
 🎯 ɪᴍᴅʙ ᴛᴇᴍᴘʟᴀᴛᴇ - `{settings['template']}`
 
 📂 ꜰɪʟᴇ ᴄᴀᴘᴛɪᴏɴ - `{settings['caption']}`</b>"""
-    
+
     btn = [[
         InlineKeyboardButton("ʀᴇꜱᴇᴛ ᴅᴀᴛᴀ", callback_data="reset_grp_data")
     ],[

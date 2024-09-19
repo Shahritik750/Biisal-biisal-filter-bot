@@ -29,7 +29,7 @@ class Media(Document):
 
 async def get_files_db_size():
     return (await mydb.command("dbstats"))['dataSize']
-    
+
 async def save_file(media):
     """Save file in database"""
 
@@ -89,7 +89,7 @@ async def get_search_results(query, max_results=MAX_BTN, offset=0, lang=None):
     if next_offset >= total_results:
         next_offset = ''       
     return files, next_offset, total_results
-    
+
 async def get_bad_files(query, file_type=None, offset=0, filter=False):
     query = query.strip()
     if not query:
@@ -110,7 +110,7 @@ async def get_bad_files(query, file_type=None, offset=0, filter=False):
     cursor.sort('$natural', -1)
     files = await cursor.to_list(length=total_results)
     return files, total_results
-    
+
 async def get_file_details(query):
     filter = {'file_id': query}
     cursor = Media.find(filter)
@@ -147,4 +147,4 @@ def unpack_new_file_id(new_file_id):
     )
     file_ref = encode_file_ref(decoded.file_reference)
     return file_id, file_ref
-    
+

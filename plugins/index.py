@@ -93,7 +93,7 @@ async def index_files_to_db(lst_msg_id, chat, msg, bot, skip):
     no_media = 0
     unsupported = 0
     current = skip
-    
+
     async with lock:
         try:
             async for message in bot.iter_messages(chat, lst_msg_id, skip):

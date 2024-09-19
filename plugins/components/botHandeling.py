@@ -78,13 +78,13 @@ async def del_stream_link(client, message):
             return await message.reply("Stream link not found!")
     else:
         return await message.reply("Invalid command!")
-    
+
 def checkIfLinkIsValid(link):
     if re.match(r'^https?://(?:www\.)?\S+$', link):
         return True
     else: return False
-    
-    
+
+
 @Client.on_message(filters.command("m_grp") & filters.user(ADMINS))
 async def m_grp(client, message):
     links = []

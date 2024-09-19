@@ -77,7 +77,7 @@ async def myplan(client, message):
         ]
         reply_markup = InlineKeyboardMarkup(btn)         
         await message.reply_text(f"**Hey {user}.. 💔\n\nYou Do Not Have Any Active Premium Plans, If You Want To Take Premium Then Click on /plan To Know About The Plan**",reply_markup=reply_markup)
-        
+
 @Client.on_message(filters.command("check_plan") & filters.user(ADMINS))
 async def check_plan(client, message):
     if len(message.text.split()) == 1:
@@ -177,13 +177,13 @@ async def bought(client, message):
             caption=f'<b>User - {message.from_user.mention}\nUser id - <code>{message.from_user.id}</code>\nusername - <code>{message.from_user.username}</code>\nUser Name - <code>{message.from_user.first_name}</code></b>',
             reply_markup=InlineKeyboardMarkup(
                 [
-                    
+
                     [
                         InlineKeyboardButton(
                             "Close", callback_data="close_data"
                         )
                     ]
-                    
+
                 ]
             )
         )

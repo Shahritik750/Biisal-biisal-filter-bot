@@ -18,7 +18,7 @@ async def broadcast_cancel(bot, query):
     elif ident == 'groups':
         temp.GROUPS_CANCEL = True
         await query.message.edit("ᴛʀʏɪɴɢ ᴛᴏ ᴄᴀɴᴄᴇʟ ɢʀᴏᴜᴘs ʙʀᴏᴀᴅᴄᴀsᴛɪɴɢ...")
-       
+
 @Client.on_message(filters.command("broadcast") & filters.user(ADMINS) & filters.reply)
 async def broadcast_users(bot, message):
     if lock.locked():
@@ -85,7 +85,7 @@ async def broadcast_group(bot, message):
     done = 0
     failed = 0
     success = 0
-    
+
     async with lock:
         async for chat in chats:
             time_taken = get_readable_time(time.time()-start_time)
