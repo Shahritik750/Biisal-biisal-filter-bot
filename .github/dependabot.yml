@@ -3,6 +3,6 @@ updates:
   - package-ecosystem: "pip"  # Python's pip package manager
     directory: "/"            # Root directory jahan aapka requirements.txt file hai
     schedule:
-      interval: "daily"       # Dependabot will check for updates every week
+      interval: "daily"       # Dependabot will check for updates every day
     commit-message:
       prefix: "deps"           # Pull request message prefix
